@@ -1,0 +1,77 @@
+<!-- Slider to Edit Sale -->
+<div class="off-canvas-menu" [ngClass]="{ 'open': toggleSalesSlider}">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-12 d-flex align-items-center justify-content-between">
+        <h3>Update Sale</h3>
+        <button type="button" class="no-border" (click)="toggleSalesSlider = false">
+          <span area-hidden="true" class="extraLarge-font">&times;</span>
+        </button>
+      </div>
+    </div>
+
+    <form #addSaleForm="ngForm">
+      <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="number" class="form-control" name="saleQuantity" required
+          [(ngModel)]="newSale.quantity" #saleQuantity="ngModel">
+        <label class="text-danger" *ngIf="saleQuantity.touched&&saleQuantity.errors?.['required']">Quantity is required</label>
+      </div>
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" class="form-control" name="salePrice" required
+          [(ngModel)]="newSale.price" #salePrice="ngModel">
+        <label class="text-danger" *ngIf="salePrice.touched&&salePrice.errors?.['required']">Price is required</label>
+      </div>
+      <div class="form-group">
+        <label for="name">Total Amount:</label>
+        <input type="number" class="form-control" name="saleAmount" required
+          #saleAmount="ngModel" [(ngModel)]="newSale.totalAmount">
+        <label class="text-danger" *ngIf="saleAmount.touched&&saleAmount.errors?.['required']">Amount is required</label>
+      </div>
+      <div class="form-group">
+        <label for="description">Sale Date:</label>
+        <input type="date" class="form-control" name="saleDate" required 
+          [(ngModel)]="newSale.saleDate" #saleDate="ngModel">
+        <label class="text-danger" *ngIf="saleDate.touched&&saleDate.errors?.['required']">Date is required</label>
+      </div>
+      <button type="button" class="button mt-3"
+        (click)="addSaleForm.form.valid?updateSale(newSale):enableSaleValidation()">
+        Update Sale</button>
+    </form>
+  </div>
+</div>
+
+<div class="container m-0 pt-3">
+  <h2>Sales</h2>
+  
+  <table *ngIf="sales && sales.length > 0">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total Amount</th>
+        <th>Date Added</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sale of sales">
+        <td>{{ sale.productName || '(Product not found)' }}</td>
+        <td>{{ sale.price}}</td>
+        <td>{{ sale.quantity }}</td>
+        <td>{{ sale.totalAmount }}</td>
+        <td>{{ sale.saleDate | date }}</td>
+        <td>
+          <button class="btn" (click)="editSale(sale)">
+            <i class="fas fa-pen mr-2"></i>Edit</button>
+          <button class="btn" (click)="deleteSale(sale.id)">
+            <i class="fas fa-trash mr-2"></i>Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <p *ngIf="!sales || sales.length === 0">No sales found.</p>
+</div>

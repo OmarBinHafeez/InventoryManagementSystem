@@ -1,0 +1,12 @@
+<header>
+    <nav>
+      <a routerLink="#" *ngFor="let item of ['Products', 'Sales', 'Purchases']" [class.active]="selectedMenu === item" (click)="onMenuClick(item)">
+        {{ item }}
+      </a>
+    </nav>
+  </header>
+  
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  

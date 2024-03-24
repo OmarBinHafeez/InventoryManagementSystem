@@ -1,0 +1,96 @@
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/bootstrap"; 
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
+
+.container{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.form-group{
+    margin-bottom: 10px;
+}
+
+.form-control{
+    border: solid #c7c8c9;
+}
+
+.button{
+    border-radius: 6px;
+    background-color: dimgrey;
+    color: white;
+    box-shadow: none;
+    border: 2px solid #777070;
+}
+
+// Slider classes
+.off-canvas-menu{
+    position: fixed;
+    top: 2%;
+    left: auto;
+    right: 0;
+    height: 100%;
+    width: 500px;
+    background-color: #fff;
+    z-index: 100;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+}
+
+.off-canvas-menu.open{
+    transform: translateX(0);
+}
+
+.fa-pen{
+    margin-right: 4px;
+    font-size: small;
+}
+
+.fa-trash{
+    margin-right: 4px;
+    font-size: small;
+}
+
+.fa-plus{
+    margin-right: 4px;
+    font-size: small;
+}
+
+th{
+    padding: 0.75rem;
+    border: 1px solid black;
+}
+
+td{
+    padding: 0.75rem;
+    border: 1px solid black;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container div.row{
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+}
+
+.container div div.col-12{
+    padding: 0;
+    border-bottom: 2px solid gray;
+}
+
+.container form{
+    margin-top: 1rem;
+}
+
+.no-border{
+    border: none;
+}
+
+.extraLarge-font{
+    font-size: xx-large;
+}

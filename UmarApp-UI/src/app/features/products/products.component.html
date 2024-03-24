@@ -1,0 +1,177 @@
+<!-- Slider to Add Product -->
+<div class="off-canvas-menu" [ngClass]="{ 'open': toggleProductsSlider}">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-12 d-flex align-items-center justify-content-between">
+        <h3 *ngIf="!isEdit">Add Product</h3>
+        <h3 *ngIf="isEdit">Update Product</h3>
+        <button *ngIf="!isEdit" type="button" class="no-border" (click)="toggleProductsSlider = false; resetProductForm()">
+          <span area-hidden="true" class="extraLarge-font">&times;</span>
+        </button>
+        <button *ngIf="isEdit" type="button" class="no-border" (click)="toggleProductsSlider = false">
+          <span area-hidden="true" class="extraLarge-font">&times;</span>
+        </button>
+      </div>
+    </div>
+
+    <form #addProductForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" name="name" required 
+          [(ngModel)]="newProduct.name" #name="ngModel">
+        <label class="text-danger" *ngIf="name.touched&&name.errors?.['required']">Name is required</label>
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea class="form-control" name="description" [(ngModel)]="newProduct.description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="number" class="form-control" name="quantity" required
+          [(ngModel)]="newProduct.quantity" #quantity="ngModel">
+        <label class="text-danger" *ngIf="quantity.touched&&quantity.errors?.['required']">Quantity is required</label>
+      </div>
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" class="form-control" name="price" required
+          [(ngModel)]="newProduct.price" #price="ngModel">
+        <label class="text-danger" *ngIf="price.touched&&price.errors?.['required']">Price is required</label>
+      </div>
+      <button type="button" class="button mt-3" *ngIf="!isEdit"
+        (click)="addProductForm.form.valid?addProduct(newProduct):enableProductValidation()">
+        Add Product</button>
+      <button type="button" class="button mt-3" *ngIf="isEdit" 
+        (click)="addProductForm.form.valid?updateProduct(newProduct):enableProductValidation()">
+        Update Product</button>
+    </form>
+  </div>
+</div>
+
+<!-- Slider to Add Sale -->
+<div class="off-canvas-menu" [ngClass]="{ 'open': toggleSalesSlider}">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-12 d-flex align-items-center justify-content-between">
+        <h3>Add Sale</h3>
+        <button type="button" class="no-border" (click)="toggleSalesSlider = false">
+          <span area-hidden="true" class="extraLarge-font">&times;</span>
+        </button>
+      </div>
+    </div>
+
+    <form #addSaleForm="ngForm">
+      <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="number" class="form-control" name="saleQuantity" required
+          [(ngModel)]="newSale.quantity" #saleQuantity="ngModel">
+        <label class="text-danger" *ngIf="saleQuantity.touched&&saleQuantity.errors?.['required']">Quantity is required</label>
+      </div>
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" class="form-control" name="salePrice" required
+          [(ngModel)]="newSale.price" #salePrice="ngModel">
+        <label class="text-danger" *ngIf="salePrice.touched&&salePrice.errors?.['required']">Price is required</label>
+      </div>
+      <div class="form-group">
+        <label for="name">Total Amount:</label>
+        <input type="number" class="form-control" name="saleAmount" required
+          #saleAmount="ngModel" [(ngModel)]="newSale.totalAmount">
+        <label class="text-danger" *ngIf="saleAmount.touched&&saleAmount.errors?.['required']">Amount is required</label>
+      </div>
+      <div class="form-group">
+        <label for="description">Sale Date:</label>
+        <input type="date" class="form-control" name="saleDate" required 
+          [(ngModel)]="newSale.saleDate" #saleDate="ngModel">
+        <label class="text-danger" *ngIf="saleDate.touched&&saleDate.errors?.['required']">Date is required</label>
+      </div>
+      <button type="button" class="button mt-3"
+        (click)="addSaleForm.form.valid?addSale(newSale):enableSaleValidation()">
+        Add Sale</button>
+    </form>
+  </div>
+</div>
+
+<!-- Slider to Add Purchase -->
+<div class="off-canvas-menu" [ngClass]="{ 'open': togglePurchaseSlider}">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-12 d-flex align-items-center justify-content-between">
+        <h3>Add Purchase</h3>
+        <button type="button" class="no-border" (click)="togglePurchaseSlider = false">
+          <span area-hidden="true" class="extraLarge-font">&times;</span>
+        </button>
+      </div>
+    </div>
+
+    <form #addPurchaseForm="ngForm">
+      <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="number" class="form-control" name="purchaseQuantity" required
+          [(ngModel)]="newPurchase.quantity" #purchaseQuantity="ngModel">
+        <label class="text-danger" *ngIf="purchaseQuantity.touched&&purchaseQuantity.errors?.['required']">Quantity is required</label>
+      </div>
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" class="form-control" name="purchasePrice" required
+          [(ngModel)]="newPurchase.price" #purchasePrice="ngModel">
+        <label class="text-danger" *ngIf="purchasePrice.touched&&purchasePrice.errors?.['required']">Price is required</label>
+      </div>
+      <div class="form-group">
+        <label for="name">Total Amount:</label>
+        <input type="number" class="form-control" name="purchaseAmount" required
+          #purchaseAmount="ngModel" [(ngModel)]="newPurchase.totalAmount">
+        <label class="text-danger" *ngIf="purchaseAmount.touched&&purchaseAmount.errors?.['required']">Amount is required</label>
+      </div>
+      <div class="form-group">
+        <label for="description">Sale Date:</label>
+        <input type="date" class="form-control" name="purchaseDate" required 
+          [(ngModel)]="newPurchase.purchaseDate" #purchaseDate="ngModel">
+        <label class="text-danger" *ngIf="purchaseDate.touched&&purchaseDate.errors?.['required']">Date is required</label>
+      </div>
+      <button type="button" class="button mt-3"
+      (click)="addPurchaseForm.form.valid?addPurchase(newPurchase):enablePurchaseValidation()">
+        Add Purchase</button>
+    </form>
+  </div>
+</div>
+
+<div class="container m-0">
+  <div class="row my-3">
+    <div class="col-6 p-0">
+      <button type="button" class="button" (click)="productSliderToggle(); resetProductForm()">Add Product</button>
+    </div>
+  </div>
+  <h2>Products</h2>
+  <table *ngIf="products && products.length > 0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+        <th>Managemnet</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>
+          <button class="btn" (click)="editProduct(product); productSliderToggle()">
+            <i class="fas fa-pen mr-2"></i>Edit</button>
+          <button class="btn" (click)="deleteProduct(product.id)">
+            <i class="fas fa-trash mr-2"></i>Delete</button>
+        </td>
+        <td>
+          <button class="btn" (click)="openSaleSlider(product.id); saleSliderToggle();resetSaleForm()">
+            <i class="fas fa-plus mr-2"></i>Add Sales</button>
+          <button class="btn" (click)="openPurchaseSlider(product.id); purchaseSliderToggle();resetPurchaseForm()">
+            <i class="fas fa-plus mr-2"></i>Add Purchase</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <p *ngIf="!products || products.length === 0">No products found.</p>
+</div>
